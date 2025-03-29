@@ -1,0 +1,20 @@
+services:
+  robonomics-collator:
+    container_name: robonomics-collator
+    image: robonomics/robonomics:v3.3.0
+    ports:
+      - 30333:30333 # p2p port
+      - 9944:9944 # ws port
+      - 9615:9615 # Prometheus port
+    volumes:
+      - ${ROBONOMICS_COLLATOR_BASE_PATH}:/robonomics
+    command: [
+      "robonomics",
+      "--chain=${CHAIN}",
+      "--name=${NODE_NAME}",
+      "--lighthouse-account=${LIGHTHOUSE_ACCOUNT}",
+      "--telemetry-url=wss://telemetry.parachain.robonomics.network/submit/ 0",
+      "--base-path=/robonomics/base/",
+      "--",
+      "--sync=warp",
+    ]
