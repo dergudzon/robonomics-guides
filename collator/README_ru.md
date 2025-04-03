@@ -37,6 +37,8 @@
 + **${CHAIN}** - название сети, в которой вы разворачиваете узел. На момент написания статьи это может быть либо **polkadot** либо **kusama**. Обратите внимание, что нельзя одновременно использовать обе сети при настройке одной ноды, необходимо везде указать одну и ту же выбранную сеть.
 + **${POLKADOT_ACCOUNT_ADDRESS}** - адрес вашего аккаунта, на который будут приходить награды за сборку блоков, в формате SS58. Пример: `4Gp3QpacQhp4ZReGhJ47pzExQiwoNPgqTWYqEQca9XAvrYsu`
 
+Мы рекомендуем разворачивать в качестве коллатора полную архивную ноду, это повышает общую стабильность сети, а также стабильность работы самого коллатора. За это отвечают 2 параметра запуска: `--state-pruning=archive` и `--blocks-pruning=archive`. Если вам не нужен коллатор с полной базой данных, просто удалите данные строки из параметров запуска, когда будете следовать этой инструкции.
+
 Запуск коллатора Робономики состоит из нескольких шагов:
 1) Предварительная подготовка сервера.
 2) Запуск коллатора, который можно выполнить в двух вариантах: в Docker либо как systemd сервис.
@@ -97,6 +99,8 @@ ExecStart=/usr/local/bin/robonomics \
 --lighthouse-account="${POLKADOT_ACCOUNT_ADDRESS}" \
 --telemetry-url="wss://telemetry.parachain.robonomics.network/submit/ 0" \
 --base-path="${BASE_PATH}" \
+--state-pruning=archive \
+--blocks-pruning=archive \
 -- \
 --sync=warp    
 
@@ -153,6 +157,8 @@ services:
       "--lighthouse-account=${LIGHTHOUSE_ACCOUNT}",
       "--telemetry-url=wss://telemetry.parachain.robonomics.network/submit/ 0",
       "--base-path=/robonomics/base/",
+      "--state-pruning=archive",
+      "--blocks-pruning=archive",
       "--",
       "--sync=warp",
     ]
