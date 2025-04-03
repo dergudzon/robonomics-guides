@@ -2,6 +2,8 @@ services:
   robonomics-collator:
     container_name: robonomics-collator
     image: robonomics/robonomics:v3.3.0
+    user: 4200:4200
+    restart: always
     ports:
       - 30333:30333 # p2p port
       - 9944:9944 # ws port
@@ -11,6 +13,7 @@ services:
     command: [
       "robonomics",
       "--chain=${CHAIN}",
+      "--collator",
       "--name=${NODE_NAME}",
       "--lighthouse-account=${LIGHTHOUSE_ACCOUNT}",
       "--telemetry-url=wss://telemetry.parachain.robonomics.network/submit/ 0",
