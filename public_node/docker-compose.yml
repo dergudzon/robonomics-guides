@@ -1,7 +1,7 @@
 services:
-  robonomics-collator:
-    container_name: robonomics-collator
+  robonomics-public-node:
     image: robonomics/robonomics:v3.3.0
+    container_name: robonomics-public-node
     user: 4200:4200
     restart: always
     ports:
@@ -13,11 +13,14 @@ services:
     command: [
       "robonomics",
       "--chain=${CHAIN}",
-      "--collator",
       "--name=${NODE_NAME}",
-      "--lighthouse-account=${LIGHTHOUSE_ACCOUNT}",
       "--telemetry-url=wss://telemetry.parachain.robonomics.network/submit/ 0",
       "--base-path=/robonomics/base/",
+      "--prometheus-external",
+      "--rpc-external",
+      "--rpc-cors=all",
+      "--state-pruning=archive", 
       "--",
       "--sync=warp",
+      "--prometheus-external"
     ]

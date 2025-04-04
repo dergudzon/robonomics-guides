@@ -176,4 +176,3 @@ docker compose logs -f -n50
 ```
 
 URL телеметрии: https://telemetry.parachain.robonomics.network/
-
