@@ -18,6 +18,8 @@ services:
       "--lighthouse-account=${LIGHTHOUSE_ACCOUNT}",
       "--telemetry-url=wss://telemetry.parachain.robonomics.network/submit/ 0",
       "--base-path=/robonomics/base/",
+      "--state-pruning=archive",
+      "--blocks-pruning=archive",
       "--",
       "--sync=warp",
     ]
