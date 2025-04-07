@@ -306,12 +306,13 @@ https://polkadot.js.org/apps/?rpc=wss%3A%2F%2F${DOMAIN_NAME}/#/explorer
 
 ## 4. Отправка запроса на включение запущенной публичной ноды в polkadot{.js} портал.
 
-Для того, чтобы запущенная вами публичная нода Робономики, была добавлена в список публичных нод на портале polkadot, вам необходимо будет отправить pull request в их репозиторий.
-1) fork https://github.com/polkadot-js/apps
-2) git clone https://github.com/MINE/apps
-3) edit - add new provider line, 
-example pr: https://github.com/polkadot-js/apps/pull/10309/files
-4) commit
-5) push
-6) pr
-7) wait
+Для того, чтобы запущенная вами публичная нода Робономики, была добавлена в список публичных нод на портале polkadot, вам необходимо будет отправить pull request в их репозиторий. Для этого нужно иметь аккаунт на Github
+
+Краткая интрукция:
+1) Создать форк проекта https://github.com/polkadot-js/apps в своем аккаунте.
+
+2) В созданном форке нужно добавить в проект строку со ссылкой на свой эндпоинт. Если вы развернули коллатор в **Robonomics Kusama**, то нужно внести правки в файле https://github.com/polkadot-js/apps/blob/master/packages/apps-config/src/endpoints/productionRelayKusama.ts в секцию с parad **2048**. Если вы развернули коллатор **Robonomics Polkadot**,то править необходимо в файле https://github.com/polkadot-js/apps/blob/master/packages/apps-config/src/endpoints/productionRelayPolkadot.ts секцию с parad **3388**. 
+
+3) Сделать коммит со сделанными изменениями и отправить в исходный репозиторий pull request с этим коммитом. Вот, для примера, ссылка на старый pull request с добавлением эндпоинта в парачейн Robonomics Kusama: https://github.com/polkadot-js/apps/pull/10309/files
+
+4) После этого останется только подождать, когда отправленный PR будет принят.
