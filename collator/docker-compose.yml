@@ -1,5 +1,5 @@
 services:
-  robonomics-collator:
+  robonomics:
     container_name: robonomics-collator
     image: robonomics/robonomics:v3.3.0
     user: 4200:4200
@@ -13,13 +13,15 @@ services:
     command: [
       "robonomics",
       "--chain=${CHAIN}",
-      "--collator",
       "--name=${NODE_NAME}",
-      "--lighthouse-account=${LIGHTHOUSE_ACCOUNT}",
       "--telemetry-url=wss://telemetry.parachain.robonomics.network/submit/ 0",
       "--base-path=/robonomics/base/",
+      "--prometheus-external",
       "--state-pruning=archive",
       "--blocks-pruning=archive",
+      "--collator",
+      "--lighthouse-account=${LIGHTHOUSE_ACCOUNT}",
       "--",
       "--sync=warp",
+      "--prometheus-external"
     ]
