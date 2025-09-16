@@ -1,0 +1,27 @@
+services:
+  robonomics:
+    container_name: robonomics-bootnode
+    image: robonomics/robonomics:v3.3.0
+    user: 4200:4200
+    restart: always
+    ports:
+      - ${PARACHAIN_PORT:-30333}:30333 # p2p port
+      - ${WS_PORT:-9944}:9944 # ws port
+      # - ${PROMETHEUS_PORT}:9615 # Prometheus port
+    volumes:
+      - ${BASE_PATH}:/robonomics
+    command: [
+      "robonomics",
+      "--chain=${CHAIN}",
+      "--name=${NODE_NAME}",
+      "--telemetry-url=wss://telemetry.parachain.robonomics.network/submit/ 0",
+      "--base-path=/robonomics/base/",
+      "--prometheus-external",
+      "--state-pruning=archive",
+      "--blocks-pruning=archive",
+      "--rpc-external",
+      "--rpc-cors=all",
+      "--",
+      "--sync=warp",
+      "--prometheus-external"
+    ]
