@@ -5,9 +5,12 @@ services:
     user: 4200:4200
     restart: always
     ports:
-      - 30333:30333 # p2p port
-      - 9944:9944 # ws port
-      - 9615:9615 # Prometheus port
+      - ${PARACHAIN_P2P_PORT:-30333}:30333
+      - ${PARACHAIN_WS_PORT:-9944}:9944
+      - ${PARACHAIN_PROMETHEUS_PORT}:9615    
+      - ${RELAYCHAIN_P2P_PORT:-30334}:30334
+      - ${RELAYCHAIN_WS_PORT:-9945}:9945
+      - ${RELAYCHAIN_PROMETHEUS_PORT}:9616
     volumes:
       - ${BASE_PATH}:/robonomics
     command: [
