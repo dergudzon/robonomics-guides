@@ -1,0 +1,36 @@
+services:
+  ipfs-daemon:
+    container_name: ipfs-daemon
+    image: ipfs/kubo:master-latest
+    restart: always
+    ports:
+      - 4001:4001
+      - 4001:4001/udp
+      - 127.0.0.1:8080:8080
+      - 127.0.0.1:5001:5001
+    volumes:
+      - ${IPFS_STAGING}:/export
+      - ${IPFS_DATA}:/data/ipfs
+    command: [
+      "daemon",
+      # "--enable-pubsub-experiment",
+      # "--enable-namesys-pubsub",
+    ]
+  ipfs-pubsub-lighthouse:
+    depends_on: 
+      ipfs-daemon:
+        condition: service_healthy
+        restart: true
+    container_name: ipfs-pubsub-sub-airalab.lighthouse.5.robonomics.eth
+    image: ipfs/kubo:master-latest
+    restart: always
+    command: [
+      "--api",
+      "/dns/ipfs-daemon/tcp/5001",
+      "pubsub",
+      "sub",
+      "--enc",
+      "json",
+      # "--discover",
+      "airalab.lighthouse.5.robonomics.eth"
+    ]
