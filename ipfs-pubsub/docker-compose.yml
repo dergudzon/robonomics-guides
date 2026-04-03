@@ -9,7 +9,7 @@ services:
       - 127.0.0.1:8080:8080
       - 127.0.0.1:5001:5001
     volumes:
-      - ${IPFS_STAGING}:/export
+      # - ${IPFS_STAGING}:/export
       - ${IPFS_DATA}:/data/ipfs
     command: [
       "daemon",
