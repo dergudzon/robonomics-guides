@@ -1,6 +1,6 @@
 robonomics ipfs-pubsub docker-compose instance
 
-1. Rename `.env_example` to `.env`:
+1. Rename *.env_example* to *.env*:
    
  ```mv .env_example .env```
 
@@ -8,13 +8,13 @@ robonomics ipfs-pubsub docker-compose instance
    
  ```docker compose up```
 
-When you'll see the `Error: experimental pubsub feature not enabled` line, you can just stop the docker compose by pressing Ctrl+C
+When you'll see the `Error: experimental pubsub feature not enabled` line, you can just stop the docker compose by pressing **Ctrl+C**
 
-3. After this, the folders "ipfs_data" and "ipfs_staging" will appear in the current directory. Open the ipfs config file in the text editor:
+3. After this, the folders *ipfs_data* and *ipfs_staging* will appear in the current directory. Open the ipfs config file in the text editor:
 
  ```nano ./ipfs_data/config```
  
- Find the "Pubsub" option here and turn it on:
+ Find the **Pubsub** option here and turn it on:
  ```
    "Pubsub": {
      "Enabled": true,
@@ -23,6 +23,8 @@ When you'll see the `Error: experimental pubsub feature not enabled` line, you c
    },
  ```
 
-4. That's it, you can just launch your docker project as daemon:
+4. That's it, you can just launch your docker compose project as daemon:
 
  ```docker compose up -d```
+
+Note: if you want to save the identity of your node, you need to backup the *ipfs_data/config* file. 
